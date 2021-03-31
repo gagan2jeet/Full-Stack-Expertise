@@ -93,34 +93,5 @@
             <param name="app">Application builder</param>
             <param name="env">Environment object</param>
         </member>
-        <member name="T:VehicleSummary.Api.Validators.AadValidator">
-            <summary>
-            Generic class that validates token issuer from the provided Azure AD authority
-            </summary>
-        </member>
-        <member name="M:VehicleSummary.Api.Validators.AadValidator.ValidateAadIssuer(System.String,Microsoft.IdentityModel.Tokens.SecurityToken,Microsoft.IdentityModel.Tokens.TokenValidationParameters)">
-            <summary>
-            Validate the issuer for multi-tenant applications of various audience (Work and School account, or Work and School accounts +
-            Personal accounts)
-            </summary>
-            <param name="issuer">Issuer to validate (will be tenanted)</param>
-            <param name="securityToken">Received Security Token</param>
-            <param name="validationParameters">Token Validation parameters</param>
-            <remarks>The issuer is considered as valid if it has the same http scheme and authority as the
-            authority from the configuration file, has a tenant Id, and optionally v2.0 (this web api
-            accepts both V1 and V2 tokens).
-            Authority aliasing is also taken into account</remarks>
-            <returns>The <c>issuer</c> if it's valid, or otherwise <c>SecurityTokenInvalidIssuerException</c> is thrown</returns>
-        </member>
-        <member name="M:VehicleSummary.Api.Validators.AadValidator.ValidateSecurityToken(System.String,Microsoft.IdentityModel.Tokens.TokenValidationParameters)">
-            <summary>
-            Validate the security token for multi-tenant applications of various audience (Work and School account, or Work and School accounts +
-            Personal accounts)
-            </summary>
-            <param name="token">Received Security Token</param>
-            <param name="validationParameters">Token Validation parameters</param>
-            <remarks>The security token can be updated based on the defined rules</remarks>
-            <returns>The <c>token</c> if it's valid, or otherwise <c>SecurityTokenInvalidException</c> is thrown</returns>
-        </member>
     </members>
 </doc>

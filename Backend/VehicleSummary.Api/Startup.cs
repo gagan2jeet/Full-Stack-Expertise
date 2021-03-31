@@ -12,7 +12,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
-using VehicleSummary.Api.Services.VehicleSummary;
 using VehicleSummary.Business;
 using VehicleSummary.Common;
 using VehicleSummary.Common.Infrastructure;

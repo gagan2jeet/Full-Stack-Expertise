@@ -1,2 +1,4 @@
 C:\Gagan\IaG\Iag-TFS\Frontend\obj\Debug\VehicleSummary.SPA.njsproj.CoreCompileInputs.cache
 C:\Gagan\IaG\Iag-TFS\Frontend\bin\Microsoft.NodejsTools.WebRole.dll
+C:\Gagan\IaG\Iag-Fork\Frontend\obj\Debug\VehicleSummary.SPA.njsproj.CoreCompileInputs.cache
+C:\Gagan\IaG\Iag-Fork\Frontend\bin\Microsoft.NodejsTools.WebRole.dll
