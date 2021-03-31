@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Backend",
+    "\\Backend\\VehicleSummary.Api",
+    "\\Backend\\VehicleSummary.Api\\Controllers",
+    "\\Backend\\VehicleSummary.IntegrationTests",
+    "\\Backend\\VehicleSummary.IntegrationTests\\VehicleChecksControllerTests",
+    "\\Backend\\VehicleSummary.UnitTests",
+    "\\Backend\\VehicleSummary.UnitTests\\ControllersTests",
+    "\\Backend\\VehicleSummary.UnitTests\\ControllersTests\\VehicleChecksControllerTests",
+    "\\Frontend",
+    "\\Frontend\\src"
+  ],
+  "SelectedNode": "\\Backend\\VehicleSummary.Api\\Services\\VehicleSummary\\VehicleSummaryResponse.cs",
+  "PreviewInSolutionExplorer": false
+}

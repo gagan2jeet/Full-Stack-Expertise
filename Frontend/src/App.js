@@ -1,67 +1,71 @@
-import React, { Component } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import React, { useEffect } from 'react';
+import Header from "../src/components/Header";
+import VehicleSummary from "../src/components/VehicleSummary";
+import Search from "../src/components/Search";
 import './App.css';
+import Spinner from '../src/components/Spinner/Spinner';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default class App extends Component {
-  constructor(props, context) {
-    super(props, context);
+import useVehicleSummaryFetch from '../src/hooks/usefetchHook';
+import useDispatchResponse from '../src/hooks/dispatchHook';
 
-    this.state = {
-      models: [],
+const VEHICLE_SUMMARY_API_URL = 'https://localhost:44387/vehicle-checks/makes/Lotus';
+const VEHICLE_SUMMARY_SEARCH_API_URL = 'https://localhost:44387/vehicle-checks/search?make=Lotus&searchString=';
+
+const App = () => {
+    const { vehicleSummaries, errorMessage, noDataMessage, loading, useSearch, searchString } = useSelector(state => state);
+    const dispatch = useDispatch();
+    const { get } = useVehicleSummaryFetch();
+    const { dispatchSuccess, dispatchError, dispatchSearch, dispatchSearchModel } = useDispatchResponse();
+    useEffect(() => {
+        get(VEHICLE_SUMMARY_API_URL)
+            .then(jsonResponse => {
+                dispatchSuccess(dispatch, jsonResponse, null);
+            }).catch(function (error) {
+                dispatchError(dispatch, error);
+            });
+    }, [dispatch]);
+
+    const search = (searchValue, checkedSwitch) => {
+        if (checkedSwitch) {
+            dispatchSearch(dispatch);
+
+            get(`${VEHICLE_SUMMARY_SEARCH_API_URL}${searchValue}`)
+                .then(jsonResponse => {
+                    dispatchSuccess(dispatch, jsonResponse, searchValue);
+                }).catch(function (error) {
+                    dispatchError(dispatch, error);
+                });
+        }
+        else {
+            dispatchSearchModel(dispatch, vehicleSummaries, searchValue);
+        }
     };
-  }
 
-  componentDidMount() {
-    fetch('https://localhost:44387/vehicle-checks/makes/Lotus')
-      .then(res => res.json())
-      .then(vehicles => {
-        this.setState({ models: vehicles.models });
-      })
-      .catch(console.log);
-  }
 
-  render = () => {
     return (
-      <div>
-        <AppBar position="static">
-          <Toolbar variant="dense">
-            <Typography variant="h6" color="inherit">
-              Vehicle List
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Typography variant="h5" component="h2">
-          Lotus
-        </Typography>
-        <Paper>
-          <Table aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Years Available</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {this.state.models.map(model => (
-                <TableRow key={model.name + model.yearsAvailable}>
-                  <TableCell component="th" scope="row">
-                    {model.name}
-                  </TableCell>
-                  <TableCell>{model.yearsAvailable}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Paper>
-      </div>
+        <div className="App">
+            <Header />
+            <Search search={search} />
+            <p className="App-intro">Vehicle details below</p>
+            <div className="vehiclesummaries">
+                {loading && !errorMessage ?
+                    (<Spinner />) : errorMessage ?
+                        (<div className="errorMessage">{errorMessage}</div>) : noDataMessage ?
+                            ((<div className="errorMessage">{noDataMessage}</div>)) : useSearch ?
+                                (
+                                    vehicleSummaries.filter(vehicle => vehicle.name.indexOf(searchString) !== -1).map((vehicleSummary, index) => (
+                                        <VehicleSummary key={`${index}-${vehicleSummary.name}`} vehicleSummary={vehicleSummary} />
+                                    ))
+                                ):
+                                (
+                                vehicleSummaries.map((vehicleSummary, index) => (
+                                    <VehicleSummary key={`${index}-${vehicleSummary.name}`} vehicleSummary={vehicleSummary} />
+                                ))
+                            )}
+            </div>
+        </div>
     );
-  };
-}
+};
+
+export default App;

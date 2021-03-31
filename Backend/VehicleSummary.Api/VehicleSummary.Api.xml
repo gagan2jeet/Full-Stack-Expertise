@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VehicleSummary.Api</name>
+    </assembly>
+    <members>
+        <member name="M:VehicleSummary.Api.Controllers.VehicleChecksController.#ctor(VehicleSummary.Contract.Interface.IVehicleSummaryService)">
+            <summary>
+            VehicleChecks controller constructor class
+            </summary>
+            <param name="vehicleSummaryService">Vehicle summary service object</param>
+        </member>
+        <member name="M:VehicleSummary.Api.Controllers.VehicleChecksController.Makes(System.String)">
+            <summary>
+            Get a vehicle summary details from the API
+            </summary>
+            <remarks>
+            Get vehicle summary by the make 
+            </remarks>
+            <param name="make"></param>
+            <response code="200"></response>
+        </member>
+        <member name="M:VehicleSummary.Api.Controllers.VehicleChecksController.Search(System.String,System.String)">
+            <summary>
+            Search model
+            </summary>
+            <remarks>
+            Get a vehicle model details from the make
+            </remarks>
+            <param name="make">Enter the Vehicle make</param>
+            <param name="searchString">Enter the model item to search</param>
+            <response code="200"></response>
+        </member>
+        <member name="M:VehicleSummary.Api.Extensions.VehicleControllerBase.ProcessResponse``1(VehicleSummary.Common.ServiceResponse{``0})">
+            <summary>
+            Return the ServiceResponse so that all our JSON responses have a structured format
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="serviceResponse"></param>
+            <returns></returns>
+        </member>
+        <member name="T:VehicleSummary.Api.Program">
+            <summary>
+            Main Program file for MVC Core
+            </summary>
+        </member>
+        <member name="M:VehicleSummary.Api.Program.Main(System.String[])">
+            <summary>
+            Main method
+            </summary>
+            <param name="args">Arcguments</param>
+        </member>
+        <member name="T:VehicleSummary.Api.Startup">
+            <summary>
+            Startup file
+            </summary>
+        </member>
+        <member name="M:VehicleSummary.Api.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Start up method
+            </summary>
+            <param name="configuration">Configuration</param>
+        </member>
+        <member name="P:VehicleSummary.Api.Startup.Configuration">
+            <summary>
+            The configuration
+            </summary>
+        </member>
+        <member name="P:VehicleSummary.Api.Startup.AutofacContainer">
+            <summary>
+            Autofac container
+            </summary>
+        </member>
+        <member name="M:VehicleSummary.Api.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            </summary>
+            <param name="services">Service collection object</param>
+            <returns>service object</returns>
+        </member>
+        <member name="M:VehicleSummary.Api.Startup.ConfigureContainer(Autofac.ContainerBuilder)">
+            <summary>
+            ConfigureContainer is where you can register things directly with Autofac. 
+            This runs after ConfigureServices so the things here will override registrations made in ConfigureServices.
+            Don't build the container; that gets done for you by the factory.
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:VehicleSummary.Api.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">Application builder</param>
+            <param name="env">Environment object</param>
+        </member>
+        <member name="T:VehicleSummary.Api.Validators.AadValidator">
+            <summary>
+            Generic class that validates token issuer from the provided Azure AD authority
+            </summary>
+        </member>
+        <member name="M:VehicleSummary.Api.Validators.AadValidator.ValidateAadIssuer(System.String,Microsoft.IdentityModel.Tokens.SecurityToken,Microsoft.IdentityModel.Tokens.TokenValidationParameters)">
+            <summary>
+            Validate the issuer for multi-tenant applications of various audience (Work and School account, or Work and School accounts +
+            Personal accounts)
+            </summary>
+            <param name="issuer">Issuer to validate (will be tenanted)</param>
+            <param name="securityToken">Received Security Token</param>
+            <param name="validationParameters">Token Validation parameters</param>
+            <remarks>The issuer is considered as valid if it has the same http scheme and authority as the
+            authority from the configuration file, has a tenant Id, and optionally v2.0 (this web api
+            accepts both V1 and V2 tokens).
+            Authority aliasing is also taken into account</remarks>
+            <returns>The <c>issuer</c> if it's valid, or otherwise <c>SecurityTokenInvalidIssuerException</c> is thrown</returns>
+        </member>
+        <member name="M:VehicleSummary.Api.Validators.AadValidator.ValidateSecurityToken(System.String,Microsoft.IdentityModel.Tokens.TokenValidationParameters)">
+            <summary>
+            Validate the security token for multi-tenant applications of various audience (Work and School account, or Work and School accounts +
+            Personal accounts)
+            </summary>
+            <param name="token">Received Security Token</param>
+            <param name="validationParameters">Token Validation parameters</param>
+            <remarks>The security token can be updated based on the defined rules</remarks>
+            <returns>The <c>token</c> if it's valid, or otherwise <c>SecurityTokenInvalidException</c> is thrown</returns>
+        </member>
+    </members>
+</doc>
